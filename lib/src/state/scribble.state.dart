@@ -47,6 +47,10 @@ class ScribbleState with _$ScribbleState {
     /// Can be used if zoom functionality is needed
     /// (e.g. through InteractiveViewer) so that the pen width remains the same.
     @Default(1) double scaleFactor,
+
+    /// Can pressure be simulated by the perfect_freehand package even if the
+    /// pointer does not support pressure.
+    @Default(true) bool canSimulatePressure,
   }) = Drawing;
 
   const factory ScribbleState.erasing({
@@ -72,6 +76,10 @@ class ScribbleState with _$ScribbleState {
     /// Can be used if zoom functionality is needed
     /// (e.g. through InteractiveViewer) so that the pen width remains the same.
     @Default(1) double scaleFactor,
+
+    /// Can pressure be simulated by the perfect_freehand package even if the
+    /// pointer does not support pressure.
+    @Default(true) bool canSimulatePressure,
   }) = Erasing;
 
   bool get active => activePointerIds.length <= 1;

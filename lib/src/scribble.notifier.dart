@@ -73,17 +73,23 @@ class ScribbleNotifier extends ScribbleNotifierBase
     /// The curve that's used to map pen pressure to the pressure value when
     /// recording, by default it's linear.
     this.pressureCurve = Curves.linear,
+
+    /// Can pressure be simulated by the perfect_freehand package even if the
+    /// pointer does not support pressure.
+    this.canSimulatePressure = true,
   }) : super(
           ScribbleState.drawing(
             sketch: sketch ?? const Sketch(lines: []),
             selectedWidth: widths[0],
             allowedPointersMode: allowedPointersMode,
+            canSimulatePressure: canSimulatePressure,
           ),
         ) {
     state = ScribbleState.drawing(
       sketch: sketch ?? const Sketch(lines: []),
       selectedWidth: widths[0],
       allowedPointersMode: allowedPointersMode,
+      canSimulatePressure: canSimulatePressure,
     );
     this.maxHistoryLength = maxHistoryLength;
   }
@@ -95,6 +101,10 @@ class ScribbleNotifier extends ScribbleNotifierBase
   /// The curve that's used to map pen pressure to the pressure value when
   /// recording.
   final Curve pressureCurve;
+
+  /// Can pressure be simulated by the perfect_freehand package even if the
+  /// pointer does not support pressure.
+  final bool canSimulatePressure;
 
   /// The state of the sketch at this moment.
   ///
@@ -144,6 +154,7 @@ class ScribbleNotifier extends ScribbleNotifierBase
         activePointerIds: s.activePointerIds,
         scaleFactor: s.scaleFactor,
         pointerPosition: s.pointerPosition,
+        canSimulatePressure: s.canSimulatePressure,
       ),
       erasing: (s) => ScribbleState.erasing(
         sketch: const Sketch(lines: []),
@@ -152,6 +163,7 @@ class ScribbleNotifier extends ScribbleNotifierBase
         activePointerIds: s.activePointerIds,
         scaleFactor: s.scaleFactor,
         pointerPosition: s.pointerPosition,
+        canSimulatePressure: s.canSimulatePressure,
       ),
     );
   }
@@ -171,6 +183,7 @@ class ScribbleNotifier extends ScribbleNotifierBase
       scaleFactor: state.scaleFactor,
       allowedPointersMode: state.allowedPointersMode,
       activePointerIds: state.activePointerIds,
+      canSimulatePressure: state.canSimulatePressure,
     );
   }
 
@@ -200,6 +213,7 @@ class ScribbleNotifier extends ScribbleNotifierBase
         selectedColor: color.value,
         selectedWidth: s.selectedWidth,
         allowedPointersMode: s.allowedPointersMode,
+        canSimulatePressure: state.canSimulatePressure,
       ),
       erasing: (s) => ScribbleState.drawing(
         sketch: s.sketch,
@@ -208,6 +222,7 @@ class ScribbleNotifier extends ScribbleNotifierBase
         allowedPointersMode: s.allowedPointersMode,
         scaleFactor: state.scaleFactor,
         activePointerIds: state.activePointerIds,
+        canSimulatePressure: state.canSimulatePressure,
       ),
     );
   }

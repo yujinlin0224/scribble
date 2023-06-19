@@ -6,10 +6,12 @@ class ScribblePainter extends CustomPainter with SketchLinePainter {
   ScribblePainter({
     required this.sketch,
     required this.scaleFactor,
+    this.canSimulatePressure = true,
   });
 
   final Sketch sketch;
   final double scaleFactor;
+  final bool canSimulatePressure;
 
   List<SketchLine> get lines => sketch.lines;
 
@@ -18,7 +20,7 @@ class ScribblePainter extends CustomPainter with SketchLinePainter {
     Paint paint = Paint()..style = PaintingStyle.fill;
 
     for (int i = 0; i < lines.length; ++i) {
-      final path = getPathForLine(lines[i]);
+      final path = getPathForLine(lines[i], canSimulatePressure: canSimulatePressure);
       if (path == null) {
         continue;
       }
@@ -34,8 +36,10 @@ class ScribblePainter extends CustomPainter with SketchLinePainter {
 }
 
 mixin SketchLinePainter {
-  Path? getPathForLine(SketchLine line, {double scaleFactor = 1.0}) {
-    final simulatePressure = line.points.isNotEmpty && line.points.every((p) => p.pressure == line.points.first.pressure);
+  Path? getPathForLine(SketchLine line, {double scaleFactor = 1.0, bool canSimulatePressure = true}) {
+    final simulatePressure = canSimulatePressure &&
+        line.points.isNotEmpty &&
+        line.points.every((p) => p.pressure == line.points.first.pressure);
     final points = line.points.map((point) => pf.Point(point.x, point.y, point.pressure)).toList();
     final outlinePoints = pf.getStroke(
       points,

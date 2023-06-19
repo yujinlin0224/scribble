@@ -24,6 +24,7 @@ _$Drawing _$$DrawingFromJson(Map<String, dynamic> json) => _$Drawing(
       selectedColor: json['selectedColor'] as int? ?? 0xFF000000,
       selectedWidth: (json['selectedWidth'] as num?)?.toDouble() ?? 5,
       scaleFactor: (json['scaleFactor'] as num?)?.toDouble() ?? 1,
+      canSimulatePressure: json['canSimulatePressure'] as bool? ?? true,
       $type: json['runtimeType'] as String?,
     );
 
@@ -37,6 +38,7 @@ Map<String, dynamic> _$$DrawingToJson(_$Drawing instance) => <String, dynamic>{
       'selectedColor': instance.selectedColor,
       'selectedWidth': instance.selectedWidth,
       'scaleFactor': instance.scaleFactor,
+      'canSimulatePressure': instance.canSimulatePressure,
       'runtimeType': instance.$type,
     };
 
@@ -61,6 +63,7 @@ _$Erasing _$$ErasingFromJson(Map<String, dynamic> json) => _$Erasing(
           : Point.fromJson(json['pointerPosition'] as Map<String, dynamic>),
       selectedWidth: (json['selectedWidth'] as num?)?.toDouble() ?? 5,
       scaleFactor: (json['scaleFactor'] as num?)?.toDouble() ?? 1,
+      canSimulatePressure: json['canSimulatePressure'] as bool? ?? true,
       $type: json['runtimeType'] as String?,
     );
 
@@ -72,5 +75,6 @@ Map<String, dynamic> _$$ErasingToJson(_$Erasing instance) => <String, dynamic>{
       'pointerPosition': instance.pointerPosition?.toJson(),
       'selectedWidth': instance.selectedWidth,
       'scaleFactor': instance.scaleFactor,
+      'canSimulatePressure': instance.canSimulatePressure,
       'runtimeType': instance.$type,
     };

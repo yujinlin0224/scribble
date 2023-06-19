@@ -25,6 +25,7 @@ class ScribbleSketch extends StatelessWidget {
       painter: ScribblePainter(
         sketch: sketch,
         scaleFactor: scaleFactor,
+        canSimulatePressure: false,
       ),
     );
   }

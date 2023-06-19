@@ -22,7 +22,11 @@ class ScribbleEditingPainter extends CustomPainter with SketchLinePainter {
       erasing: (_) => null,
     );
     if (activeLine != null) {
-      final path = getPathForLine(activeLine, scaleFactor: state.scaleFactor);
+      final path = getPathForLine(
+        activeLine,
+        scaleFactor: state.scaleFactor,
+        canSimulatePressure: state.canSimulatePressure,
+      );
       if (path != null) {
         paint.color = Color(activeLine.color);
         canvas.drawPath(path, paint);

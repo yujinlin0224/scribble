@@ -61,6 +61,7 @@ class _ScribbleState extends State<Scribble> {
                 painter: ScribblePainter(
                   sketch: state.sketch,
                   scaleFactor: state.scaleFactor,
+                  canSimulatePressure: state.canSimulatePressure,
                 ),
               ),
             ),
